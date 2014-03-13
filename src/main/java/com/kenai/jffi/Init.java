@@ -62,7 +62,13 @@ final class Init {
         }
         List<Throwable> failureCauses = new ArrayList<Throwable>();
         List<ClassLoader> loaders = getClassLoaders();
-        
+
+        try {
+            Class.forName(stubLoaderClassName, true, ClassLoader.getSystemClassLoader());
+        } catch (ClassNotFoundException ex){
+            
+        }
+
         for (ClassLoader cl : loaders) {
             try {
                 Class<?> c = Class.forName(stubLoaderClassName, true, cl);
